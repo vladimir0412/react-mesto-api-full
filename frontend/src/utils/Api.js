@@ -1,3 +1,5 @@
+const token = localStorage.getItem('token');
+
 class Api {
   constructor(config) {
     this._url = config.url;
@@ -82,9 +84,9 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  url: 'https://api.pavlovv.students.nomoredomains.sbs',
   headers: {
-    authorization: 'a300aec3-6e18-4e7b-8fa3-4618f0df7f74',
+    authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
   }
 });
