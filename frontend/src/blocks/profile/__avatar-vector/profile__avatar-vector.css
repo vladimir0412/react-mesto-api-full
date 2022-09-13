@@ -1,0 +1,10 @@
+.profile__avatar-vector {
+  background-image: url(../../../images/Vector.png);
+  width: 26px;
+  height: 26px;
+  position: relative;
+  left: 41%;
+  top: 0;
+  opacity: 0;
+  transition-duration: .6s;
+}

@@ -1,0 +1,13 @@
+.card__like_active {
+  background-image: url(../../../../images/like-active.png);
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+  transition-duration: .4s;
+  border: none;
+  background-color: #fff;
+}
+
+.card__like_active:hover {
+  opacity: .6;
+}

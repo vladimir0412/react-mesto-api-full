@@ -1,0 +1,21 @@
+.popup__button_inactive {
+  border: 1px solid rgba(0, 0, 0, .2);
+  color: rgba(0, 0, 0, .2);
+  width: 100%;
+  min-height: 50px;
+  background: #fff;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  cursor: pointer;
+  margin: 48px auto 0;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__button {
+    font-size: 14px;
+    margin: 45px auto 0;
+    min-height: 46px;
+  }
+}

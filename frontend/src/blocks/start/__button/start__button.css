@@ -1,0 +1,19 @@
+.start__button {
+  width: 100%;
+  min-height: 50px;
+  background: #fff;
+  border-radius: 2px;
+  color: #000;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  border: none;
+  cursor: pointer;
+  transition-duration: .4s;
+  margin: 216px auto 0;
+}
+
+.start__button:hover {
+  opacity: .8;
+}
+

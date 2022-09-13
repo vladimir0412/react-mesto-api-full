@@ -1,0 +1,11 @@
+.start {
+  margin: 60px auto 120px;
+  max-width: 358px;
+}
+
+@media screen and (max-width: 420px) {
+  .start {
+    max-width: calc(100% - 20px*2);
+    margin: 40px auto 48px;
+  }
+}

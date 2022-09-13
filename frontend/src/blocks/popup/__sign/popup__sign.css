@@ -1,0 +1,5 @@
+.popup__sign {
+  margin: 25px auto 35px;
+  display: flex;
+  justify-content: center;
+}
