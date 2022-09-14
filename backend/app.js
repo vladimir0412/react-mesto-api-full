@@ -1,14 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { errors, Joi, celebrate } = require('celebrate');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
-const { createUser, login } = require('./controllers/users');
-const { handler } = require('./middlewares/handler');
+const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const ServerError = require('./errors/ServerError');
 
 const app = express();
 const NotFound = require('./errors/NotFound');
@@ -18,12 +20,19 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
+app.use(cors());
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -54,6 +63,13 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use(handler);
+app.use((error, req, res, next) => {
+  if (error.statusCode) {
+    res.status(error.statusCode).send({ message: error.message });
+  } else {
+    res.status(ServerError).send({ message: 'Произошла ошибка' });
+  }
+  next();
+});
 
-app.listen(3000);
+app.listen(3001);

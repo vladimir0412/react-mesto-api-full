@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const Unauthorized = require('../errors/Unauthorized');
+const BadRequest = require('../errors/BadRequest');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -34,7 +35,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate(value) {
       if (!validator.isEmail(value)) {
-        throw new Error({ message: 'Некорректный email' });
+        throw new BadRequest({ message: 'Некорректный email' });
       }
     },
   },

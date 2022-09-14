@@ -41,8 +41,8 @@ function App() {
   React.useEffect(() => {
     if(loggedIn === true) {
       api.getProfile()
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then((data) => {
+        setCurrentUser(data.user);
       })
       .catch((error)=>{
         console.log(error);
@@ -50,12 +50,12 @@ function App() {
       api.getCards()
       .then((data) => {
         setCards(
-          data.map((item) => ({
-            _id: item._id,
-            link: item.link,
-            name: item.name,
-            likes: item.likes,
-            owner: item.owner
+          data.map((card) => ({
+            _id: card._id,
+            link: card.link,
+            name: card.name,
+            likes: card.likes,
+            owner: card.owner
           }))
         );
       })
@@ -75,7 +75,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     if (!isLiked) {
@@ -110,8 +110,8 @@ function App() {
 
   function handleUpdateUser(data) {
     api.editProfile(data)
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then((data) => {
+        setCurrentUser(data.user);
         closeAllPopups();
       }
     )
@@ -122,8 +122,8 @@ function App() {
 
   function handleUpdateAvatar(data) {
     api.editAvatar(data)
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then((data) => {
+        setCurrentUser(data.user);
         closeAllPopups();
       }
     )
@@ -148,7 +148,7 @@ function App() {
     auth.register(email, password)
       .then((data) => {
         if(data) {
-          history.push('/sign-in');
+          history.push('/signin');
           setIsSuccessfulPopupOpen(true);
           setPopupText('Вы успешно зарегистрировались!');
           setPopupSign(sign);
@@ -187,7 +187,7 @@ function App() {
 
   function removeToken() {
     localStorage.removeItem('token');
-    history.push('/sign-in');
+    history.push('/signin');
     setLoggedIn(false);
   }
 
@@ -199,7 +199,7 @@ function App() {
         if(res) {
           setLoggedIn(true);
           history.push("/");
-          setUserEmail(res.data.email);
+          setUserEmail(res.user.email);
         }
       })
       .catch ((error) => {
@@ -229,12 +229,12 @@ function App() {
                 removeToken={removeToken}
                 email={userEmail}
               />
-              <Route path="/sign-up">
+              <Route path="/signup">
                 <Register
                   submitButton={toRegister}
                 />
               </Route>
-              <Route path="/sign-in">
+              <Route path="/signin">
                 <Login
                   submitButton={toLogin}
                 />

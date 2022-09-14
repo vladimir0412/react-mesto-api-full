@@ -25,7 +25,7 @@ function Register({ submitButton }) {
   }
 
   function toLinkLogin() {
-    history.push('/sign-in');
+    history.push('/signin');
   }
 
   return (

@@ -27,7 +27,7 @@ function Login({ submitButton }) {
   }
 
   function toLinkRegister() {
-    history.push('/sign-up');
+    history.push('/signup');
   }
 
   return (
