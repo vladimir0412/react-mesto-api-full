@@ -84,7 +84,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mestonewbackend.vercel.app',
+  url: 'http://localhost:3001',
   headers: {
     authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
