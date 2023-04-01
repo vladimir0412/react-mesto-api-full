@@ -14,4 +14,8 @@
 # .idea
 # .vscode
 
+<<<<<<< HEAD
 # .env
+=======
+.env
+>>>>>>> f4f3758b3ea2e28a453451b6794b7be690cd9115
