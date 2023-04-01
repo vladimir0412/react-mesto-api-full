@@ -5,6 +5,7 @@ const ForbiddenCode = 403;
 const NotFoundCode = 404;
 const ConflictCode = 409;
 const ServerErrorCode = 500;
+
 module.exports = {
   CreatedCode,
   BadRequestCode,
